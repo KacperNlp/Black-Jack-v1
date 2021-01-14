@@ -44,12 +44,13 @@ html {
 
   &__player {
     width: 100%;
-    margin-bottom: 150px;
+    height: 180px;
+    margin-bottom: 10px;
 
     & h2 {
-      display: block;
       width: 100%;
       padding-bottom: 15px;
+      margin-bottom: 15px;
       border-bottom: 2px solid $fontColor;
       letter-spacing: 2px;
       font-size: 2rem;
@@ -96,4 +97,16 @@ html {
       background: $fontColor;
     }
   }
+}
+
+.card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 100px;
+  background: $fontColor;
+  border-radius: 5px;
+  color: red;
+  font-size: 1.8rem;
 }
