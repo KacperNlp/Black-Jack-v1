@@ -1,1 +1,1 @@
-import {Card} from './scripts/Card.js'
+import  {Deck} from './scripts/Deck.js'
