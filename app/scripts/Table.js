@@ -5,11 +5,11 @@ export class Table{
     }
 
     showPlayerCard(card){
-        this.playerCards.appendChild(card);
+        this.playerCards.appendChild(card.render());
     }
 
     
     showDealerCard(card){
-        this.dealerCards.appendChild(card);
+        this.dealerCards.appendChild(card.render());
     }
 }
