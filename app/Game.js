@@ -10,11 +10,19 @@ const dealerCardsContainerId = 'AI-cards';
 const takeCardButtonId = 'take-card';
 const stayButtonId = 'stay';
 
+//player and AI point containers 
+const playerPointsContainerId = 'player-points';
+const dealerPointsContainerId = 'AI-points';
+
 class Game{
-    constructor({player, tabel, takeCardButton, stayButton}){
+    constructor({player, tabel, takeCardButton, stayButton, playerPointsContainer, dealerPointsContainer}){
         //AI and user
         this.player = player;
         this.dealer = new Player('Dealer');
+
+        //AI and player points containers
+        this.playerPointsContainer = playerPointsContainer;
+        this.dealerPointsContainer = dealerPointsContainer;
 
         //buttons
         this.takeCardButton = takeCardButton;
@@ -33,15 +41,12 @@ class Game{
     }
 
     #run(){
+        //buttons handle
         this.takeCardButton.addEventListener('click', this.#takeCard);
+        this.stayButton.addEventListener('click', this.#dealerPlay);
+
         this.#dealCards();
-    }
-
-    #takeCard = () =>{
-        const card = this.deck.pickOne();
-
-        this.player.hand.addCard(card);
-        this.tabel.showPlayerCard(card);
+        this.#appendPointsToHtml();
     }
 
     #dealCards(){
@@ -60,6 +65,41 @@ class Game{
 
         }
     }
+
+    #appendPointsToHtml(){
+
+        this.dealer.calculatePoints();
+        this.player.calculatePoints();
+
+        this.playerPointsContainer.innerHTML = this.player.score;
+        this.dealerPointsContainer.innerHTML = this.dealer.score;
+    }
+
+    //buttons functions
+
+    #takeCard = () =>{
+        const card = this.deck.pickOne();
+
+        this.player.hand.addCard(card);
+        this.tabel.showPlayerCard(card);
+
+        this.#appendPointsToHtml();
+    }
+
+    #dealerPlay = () =>{
+
+        while(this.dealer.score <= this.player.score && this.dealer.score < 21 && this.player.score < 21){
+
+            const card = this.deck.pickOne();
+
+            this.dealer.hand.addCard(card);
+            this.tabel.showDealerCard(card);
+
+            this.#appendPointsToHtml();
+
+        }
+
+    }
 }
 
 const tabel = new Table(bindToHtml.bindById(playerCardsContainerId), bindToHtml.bindById(dealerCardsContainerId))
@@ -70,4 +110,6 @@ const game = new Game({
     tabel,
     takeCardButton: bindToHtml.bindById(takeCardButtonId),
     stayButton: bindToHtml.bindById(stayButtonId),
+    playerPointsContainer : bindToHtml.bindById(playerPointsContainerId),
+    dealerPointsContainer : bindToHtml.bindById(dealerPointsContainerId),
 });

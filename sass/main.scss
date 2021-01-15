@@ -63,13 +63,15 @@ html {
   left: 50px;
   top: 50px;
   &__player {
-    margin-bottom: 100px;
     font-size: 2rem;
     text-align: center;
   }
 
   &__player-points {
+    text-align: center;
+    font-size: 1.8rem;
     margin-top: 20px;
+    margin-bottom: 50px;
   }
 }
 
