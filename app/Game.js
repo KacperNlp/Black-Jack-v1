@@ -1,18 +1,18 @@
 import  {Deck} from './scripts/Deck.js'
 import { Player } from './scripts/Player.js';
 import {bindToHtml} from './scripts/BindToHtml.js'
+import {Table} from './scripts/Table.js'
 
 const playerCardsContainerId = 'player-cards';
 const dealerCardsContainerId = 'AI-cards';
 
 class Game{
-    constructor({player, playerCards, dealerCards}){
+    constructor({player, tabel}){
         //AI and user
         this.player = player;
         this.dealer = new Player('Dealer');
         
-        this.playerCards = playerCards;
-        this.dealerCards = dealerCards;
+        this.tabel = tabel;
 
         this.deck = new Deck();
 
@@ -34,22 +34,22 @@ class Game{
             const playerCard = this.deck.pickOne();
 
             this.player.hand.addCard(playerCard);
-            this.playerCards.appendChild(playerCard.render());
+            this.tabel.showPlayerCard(playerCard.render());
 
             
             const dealerCard = this.deck.pickOne();
 
             this.dealer.hand.addCard(dealerCard);
-            this.dealerCards.appendChild(dealerCard.render());
+            this.tabel.showDealerCard(dealerCard.render());
 
         }
     }
 }
 
+const tabel = new Table(bindToHtml.bindById(playerCardsContainerId), bindToHtml.bindById(dealerCardsContainerId))
 const player = new Player('User');
 
 const game = new Game({
     player,
-    playerCards: bindToHtml.bindById(playerCardsContainerId),
-    dealerCards: bindToHtml.bindById(dealerCardsContainerId),
+    tabel
 });
