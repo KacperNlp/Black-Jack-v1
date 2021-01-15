@@ -127,3 +127,28 @@ html {
 .clubs {
   color: #121212;
 }
+
+.message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 250px;
+  padding: 30px;
+  background: $siteBackground;
+  text-transform: uppercase;
+  font-size: 5rem;
+  box-shadow: $shadow;
+}
+
+.hidden {
+  display: none;
+}
+
+.hidden-button {
+  opacity: 0;
+}

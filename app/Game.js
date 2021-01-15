@@ -2,6 +2,7 @@ import  {Deck} from './scripts/Deck.js'
 import { Player } from './scripts/Player.js';
 import {bindToHtml} from './scripts/BindToHtml.js'
 import {Table} from './scripts/Table.js'
+import {message} from './scripts/Message.js'
 
 const playerCardsContainerId = 'player-cards';
 const dealerCardsContainerId = 'AI-cards';
@@ -99,6 +100,34 @@ class Game{
 
         }
 
+        this.#endOfGame();
+
+    }
+
+    #endOfGame(){
+
+        this.takeCardButton.removeEventListener('click', this.#takeCard);
+        this.stayButton.removeEventListener('click', this.#dealerPlay);
+
+        this.takeCardButton.classList.add('hidden-button');
+        this.stayButton.classList.add('hidden-button');
+
+        if(this.player.score <= 21 && this.player.score === this.dealer.score){
+
+            message.gameWinner('Draw');
+            return;
+
+        }else if(this.player.score > 21 || this.dealer.score > this.player.score && this.dealer.score <= 21){
+
+            message.gameWinner('Dealer won!');
+            return;
+
+        }else if(this.dealer.score > 21 || this.player.score > this.dealer.score && this.player.score <= 21){
+
+            message.gameWinner('Player won!');
+            return;
+
+        }
     }
 }
 

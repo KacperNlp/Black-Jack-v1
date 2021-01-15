@@ -13,7 +13,7 @@ export class Hand{
     }
 
     getHandStrength(){
-        if(this.cardsWithTheSameWeight('A').length === 2){
+        if(this.cardsWithTheSameWeight('A') === 2){
             return 21;
         }
 
